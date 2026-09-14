@@ -13,7 +13,10 @@ class TbbnApiException extends \Exception
 {
     public function __construct(
         public readonly int $status,
-        public readonly string $code,
+        // Named errorCode, not code — \Exception already declares a non-readonly $code
+        // property, and PHP doesn't allow a subclass to redeclare an inherited property as
+        // readonly. Caught by this SDK's own CI (a real bug, not a hypothetical one).
+        public readonly string $errorCode,
         string $message,
         public readonly ?string $requestId = null,
     ) {
