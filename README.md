@@ -63,3 +63,7 @@ $isValid = WebhookVerifier::verify($rawBody, $_SERVER['HTTP_X_TBBN_SIGNATURE'], 
 `reservations`, `tradeSessions`, `checkout`, `billing`, `notifications`, `webhooks`,
 `auditLogs`, `moderation`, `fraud`, `reputation`, `analytics`, `features`, `sandbox` — every
 resource group `sdk-js` exposes, one class per group under `src/Resources/`.
+
+## Publishing a new version
+
+Bump `version` in `composer.json`, push (auto-syncs to the public mirror), then tag the **mirror** repo directly (`AzaMoney/tbbn-sdk-php`, not this one) with the new version and push that tag — Packagist picks it up via its webhook. See `docs/architecture/sdk-publishing.md` for the complete runbook.
