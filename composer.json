@@ -1,6 +1,6 @@
 {
   "name": "tbbn/sdk",
-  "description": "Client SDK for the TBBN Platform API (Phase 0-13 resources). STATUS: WORKING (source only) - untested, no PHP toolchain in the environment this was written in. Review before shipping to production.",
+  "description": "Client SDK for the TBBN Platform API (Phase 0-13 resources).",
   "type": "library",
   "license": "MIT",
   "require": {
