@@ -23,7 +23,7 @@ idiom).
 ```php
 use Tbbn\Sdk\TbbnClient;
 
-$client = new TbbnClient(baseUrl: 'https://sandbox-api.tbbnetwork.com', apiKey: 'sk_sandbox_...');
+$client = new TbbnClient(baseUrl: 'https://api.tbbnetwork.com', apiKey: 'sk_sandbox_...');
 
 $offer = $client->offers->create([
     'fromSellerId' => '...',
