@@ -1,8 +1,28 @@
 {
   "name": "tbbn/sdk",
-  "description": "Client SDK for the TBBN Platform API (Phase 0-13 resources).",
+  "description": "PHP client for the TBBN Platform API — publish listings, manage offers and trade sessions, and verify webhooks.",
   "type": "library",
   "license": "MIT",
+  "keywords": [
+    "tbbn",
+    "trade by barter",
+    "barter",
+    "trade",
+    "exchange",
+    "api",
+    "sdk"
+  ],
+  "homepage": "https://developer.tbbnetwork.com/merchant/docs/sdks",
+  "support": {
+    "docs": "https://developer.tbbnetwork.com/merchant/docs/sdks",
+    "forum": "https://developer.tbbnetwork.com/community"
+  },
+  "authors": [
+    {
+      "name": "Trade By Barter Network, Inc.",
+      "homepage": "https://tbbnetwork.com"
+    }
+  ],
   "require": {
     "php": "^8.1",
     "ext-curl": "*",

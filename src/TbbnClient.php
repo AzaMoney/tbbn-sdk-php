@@ -25,7 +25,6 @@ use Tbbn\Sdk\Resources\OffersResource;
 use Tbbn\Sdk\Resources\MerchantsResource;
 use Tbbn\Sdk\Resources\RecommendationsResource;
 use Tbbn\Sdk\Resources\ReputationResource;
-use Tbbn\Sdk\Resources\ReservationsResource;
 use Tbbn\Sdk\Resources\SandboxResource;
 use Tbbn\Sdk\Resources\SearchResource;
 use Tbbn\Sdk\Resources\SellersResource;
@@ -34,11 +33,6 @@ use Tbbn\Sdk\Resources\TradeSessionsResource;
 use Tbbn\Sdk\Resources\WebhooksResource;
 
 /**
- * Status: WORKING (source only) — untested. No PHP toolchain exists in the environment this was
- * written in, so this code has not been run. Written as a faithful translation of
- * packages/sdk-js/src/client.ts's full method surface (all 27 resource groups, Phase 0-13).
- * Review before shipping to production.
- *
  * Client over the TBBN Platform API. Uses PHP's built-in curl extension — no Guzzle dependency,
  * so this SDK stays usable in any PHP 8.1+ project without a hard third-party HTTP client
  * requirement.
@@ -60,7 +54,6 @@ final class TbbnClient
     public readonly MatchingResource $matching;
     public readonly RecommendationsResource $recommendations;
     public readonly OffersResource $offers;
-    public readonly ReservationsResource $reservations;
     public readonly TradeSessionsResource $tradeSessions;
     public readonly CheckoutResource $checkout;
     public readonly BillingResource $billing;
@@ -94,7 +87,6 @@ final class TbbnClient
         $this->matching = new MatchingResource($this);
         $this->recommendations = new RecommendationsResource($this);
         $this->offers = new OffersResource($this);
-        $this->reservations = new ReservationsResource($this);
         $this->tradeSessions = new TradeSessionsResource($this);
         $this->checkout = new CheckoutResource($this);
         $this->billing = new BillingResource($this);
