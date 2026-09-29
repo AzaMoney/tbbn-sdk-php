@@ -31,6 +31,15 @@ use Tbbn\Sdk\Resources\SellersResource;
 use Tbbn\Sdk\Resources\TradeEngineResource;
 use Tbbn\Sdk\Resources\TradeSessionsResource;
 use Tbbn\Sdk\Resources\WebhooksResource;
+use Tbbn\Sdk\Resources\BranchesResource;
+use Tbbn\Sdk\Resources\BusinessesResource;
+use Tbbn\Sdk\Resources\BusinessMerchantLinksResource;
+use Tbbn\Sdk\Resources\MerchantFeedResource;
+use Tbbn\Sdk\Resources\OAuthClientsResource;
+use Tbbn\Sdk\Resources\OAuthLinkResource;
+use Tbbn\Sdk\Resources\ReviewsResource;
+use Tbbn\Sdk\Resources\SpaceResource;
+use Tbbn\Sdk\Resources\StatusResource;
 
 /**
  * Client over the TBBN Platform API. Uses PHP's built-in curl extension — no Guzzle dependency,
@@ -42,7 +51,16 @@ final class TbbnClient
     public readonly AuthResource $auth;
     public readonly MerchantsResource $merchants;
     public readonly ApiKeysResource $apiKeys;
+    public readonly OAuthClientsResource $oauthClients;
+    public readonly OAuthLinkResource $oauthLink;
     public readonly SellersResource $sellers;
+    public readonly BusinessesResource $businesses;
+    public readonly BranchesResource $branches;
+    public readonly BusinessMerchantLinksResource $businessMerchantLinks;
+    public readonly SpaceResource $space;
+    public readonly MerchantFeedResource $merchantFeed;
+    public readonly ReviewsResource $reviews;
+    public readonly StatusResource $status;
     public readonly ListingsResource $listings;
     public readonly CatalogResource $catalog;
     public readonly MediaResource $media;
@@ -75,7 +93,16 @@ final class TbbnClient
         $this->auth = new AuthResource($this);
         $this->merchants = new MerchantsResource($this);
         $this->apiKeys = new ApiKeysResource($this);
+        $this->oauthClients = new OAuthClientsResource($this);
+        $this->oauthLink = new OAuthLinkResource($this);
         $this->sellers = new SellersResource($this);
+        $this->businesses = new BusinessesResource($this);
+        $this->branches = new BranchesResource($this);
+        $this->businessMerchantLinks = new BusinessMerchantLinksResource($this);
+        $this->space = new SpaceResource($this);
+        $this->merchantFeed = new MerchantFeedResource($this);
+        $this->reviews = new ReviewsResource($this);
+        $this->status = new StatusResource($this);
         $this->listings = new ListingsResource($this);
         $this->catalog = new CatalogResource($this);
         $this->media = new MediaResource($this);
@@ -142,16 +169,10 @@ final class TbbnClient
             return null;
         }
 
-        $data = json_decode($responseBody, true) ?? [];
+        $data = json_decode($responseBody, true);
 
         if ($status < 200 || $status >= 300) {
-            $error = $data['error'] ?? [];
-            throw new TbbnApiException(
-                $status,
-                $error['code'] ?? 'UNKNOWN_ERROR',
-                $error['message'] ?? 'Unknown error',
-                $error['requestId'] ?? null,
-            );
+            throw TbbnApiException::fromBody($status, $data);
         }
 
         return $data;
