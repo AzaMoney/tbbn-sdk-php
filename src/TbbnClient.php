@@ -6,7 +6,6 @@ namespace Tbbn\Sdk;
 
 use Tbbn\Sdk\Resources\AnalyticsResource;
 use Tbbn\Sdk\Resources\ApiKeysResource;
-use Tbbn\Sdk\Resources\AuditLogsResource;
 use Tbbn\Sdk\Resources\AuthResource;
 use Tbbn\Sdk\Resources\BillingResource;
 use Tbbn\Sdk\Resources\CatalogResource;
@@ -77,7 +76,6 @@ final class TbbnClient
     public readonly BillingResource $billing;
     public readonly NotificationsResource $notifications;
     public readonly WebhooksResource $webhooks;
-    public readonly AuditLogsResource $auditLogs;
     public readonly ModerationResource $moderation;
     public readonly FraudResource $fraud;
     public readonly ReputationResource $reputation;
@@ -119,7 +117,6 @@ final class TbbnClient
         $this->billing = new BillingResource($this);
         $this->notifications = new NotificationsResource($this);
         $this->webhooks = new WebhooksResource($this);
-        $this->auditLogs = new AuditLogsResource($this);
         $this->moderation = new ModerationResource($this);
         $this->fraud = new FraudResource($this);
         $this->reputation = new ReputationResource($this);
