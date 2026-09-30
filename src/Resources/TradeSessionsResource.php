@@ -61,6 +61,16 @@ final class TradeSessionsResource
         ]);
     }
 
+    /** Extends a matching-only side's report deadline once, by 1–14 days, before it passes. */
+    public function extendExternalSettlement(string $id, string $side, int $days, string $reason): mixed
+    {
+        return $this->client->request('POST', "/v1/trade-sessions/{$id}/external-settlement/extend", [
+            'side' => $side,
+            'days' => $days,
+            'reason' => $reason,
+        ]);
+    }
+
     public function acknowledgeHoldTerms(string $id, ?string $actingSellerId = null): mixed
     {
         return $this->client->request('POST', "/v1/trade-sessions/{$id}/acknowledge-hold-terms", ['actingSellerId' => $actingSellerId]);
