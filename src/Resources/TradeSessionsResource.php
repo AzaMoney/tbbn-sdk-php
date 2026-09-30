@@ -48,6 +48,19 @@ final class TradeSessionsResource
         return $this->client->request('POST', "/v1/trade-sessions/{$id}/excuse-fulfillment", ['note' => $note]);
     }
 
+    /**
+     * A matching-only side reports how it settled on your platform: 'completed', or 'failed' with
+     * a reason. Unreported sides are released as failed after 14 days.
+     */
+    public function reportExternalSettlement(string $id, string $side, string $outcome, ?string $reason = null): mixed
+    {
+        return $this->client->request('POST', "/v1/trade-sessions/{$id}/external-settlement", [
+            'side' => $side,
+            'outcome' => $outcome,
+            'reason' => $reason,
+        ]);
+    }
+
     public function acknowledgeHoldTerms(string $id, ?string $actingSellerId = null): mixed
     {
         return $this->client->request('POST', "/v1/trade-sessions/{$id}/acknowledge-hold-terms", ['actingSellerId' => $actingSellerId]);
