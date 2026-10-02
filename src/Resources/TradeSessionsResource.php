@@ -76,10 +76,25 @@ final class TradeSessionsResource
         return $this->client->request('POST', "/v1/trade-sessions/{$id}/acknowledge-hold-terms", ['actingSellerId' => $actingSellerId]);
     }
 
-    /** Suggests a TBBN Space location for the exchange; the other side accepts it. */
-    public function proposeSpace(string $id, string $branchId, ?string $actingSellerId = null): mixed
-    {
-        return $this->client->request('POST', "/v1/trade-sessions/{$id}/space-proposals", ['branchId' => $branchId, 'actingSellerId' => $actingSellerId]);
+    /**
+     * Proposes a meeting place. With $spaceId and $acceptTerms true, the Space is booked in your
+     * name (you pay for it) when the other trader accepts; a $branchId alone proposes a location.
+     */
+    public function proposeSpace(
+        string $id,
+        ?string $branchId = null,
+        ?string $actingSellerId = null,
+        ?string $spaceId = null,
+        ?string $scheduledAt = null,
+        ?bool $acceptTerms = null,
+    ): mixed {
+        return $this->client->request('POST', "/v1/trade-sessions/{$id}/space-proposals", [
+            'branchId' => $branchId,
+            'spaceId' => $spaceId,
+            'scheduledAt' => $scheduledAt,
+            'acceptTerms' => $acceptTerms,
+            'actingSellerId' => $actingSellerId,
+        ]);
     }
 
     public function listSpaceProposals(string $id): mixed

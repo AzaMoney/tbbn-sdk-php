@@ -49,4 +49,10 @@ final class MerchantsResource
     {
         return $this->client->request('PATCH', "/v1/merchants/{$id}/users/{$userId}/role", ['role' => $role], TbbnClient::idempotencyHeader($idempotencyKey));
     }
+
+    /** Removes someone from the Merchant team. The owner can't be removed. */
+    public function removeUser(string $id, string $userId): mixed
+    {
+        return $this->client->request('DELETE', "/v1/merchants/{$id}/users/{$userId}");
+    }
 }
