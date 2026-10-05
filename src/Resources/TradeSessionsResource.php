@@ -97,6 +97,12 @@ final class TradeSessionsResource
         ]);
     }
 
+    /** Declines the other trader's meeting-place proposal. Nothing is booked. */
+    public function declineSpaceProposal(string $id, string $proposalId, ?string $actingSellerId = null): mixed
+    {
+        return $this->client->request('POST', "/v1/trade-sessions/{$id}/space-proposals/{$proposalId}/decline", ['actingSellerId' => $actingSellerId]);
+    }
+
     public function listSpaceProposals(string $id): mixed
     {
         return $this->client->request('GET', "/v1/trade-sessions/{$id}/space-proposals");
