@@ -41,4 +41,10 @@ final class BusinessesResource
     {
         return $this->client->request('GET', "/v1/businesses/{$businessId}/business-users");
     }
+
+    /** The team's invitations waiting for an answer. */
+    public function listInvitations(string $businessId): mixed
+    {
+        return $this->client->request('GET', "/v1/businesses/{$businessId}/invitations");
+    }
 }

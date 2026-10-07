@@ -55,4 +55,15 @@ final class MerchantsResource
     {
         return $this->client->request('DELETE', "/v1/merchants/{$id}/users/{$userId}");
     }
+
+    /** The team's invitations waiting for an answer. inviteUser sends one; the person joins when they accept it. */
+    public function listInvitations(string $id): mixed
+    {
+        return $this->client->request('GET', "/v1/merchants/{$id}/invitations");
+    }
+
+    public function revokeInvitation(string $id, string $invitationId): mixed
+    {
+        return $this->client->request('DELETE', "/v1/merchants/{$id}/invitations/{$invitationId}");
+    }
 }
