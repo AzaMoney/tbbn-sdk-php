@@ -35,6 +35,12 @@ final class MerchantsResource
         return $this->client->request('GET', "/v1/merchants/{$id}/application-status");
     }
 
+    /** Every commission rate the merchant has set, newest first. */
+    public function commissionRates(string $id): mixed
+    {
+        return $this->client->request('GET', "/v1/merchants/{$id}/commission-rates");
+    }
+
     public function inviteUser(string $id, string $email, string $role, ?string $idempotencyKey = null): mixed
     {
         return $this->client->request('POST', "/v1/merchants/{$id}/users/invite", ['email' => $email, 'role' => $role], TbbnClient::idempotencyHeader($idempotencyKey));
