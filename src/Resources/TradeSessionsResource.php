@@ -15,6 +15,12 @@ final class TradeSessionsResource
         return $this->client->request('GET', TbbnClient::withQuery('/v1/trade-sessions', ['sellerId' => $sellerId]));
     }
 
+    /** Your Merchant's trade records for your books (ISO dates; default the last 90 days). */
+    public function records(?string $from = null, ?string $to = null): mixed
+    {
+        return $this->client->request('GET', TbbnClient::withQuery('/v1/trade-sessions/records', ['from' => $from, 'to' => $to]));
+    }
+
     public function get(string $id): mixed
     {
         return $this->client->request('GET', "/v1/trade-sessions/{$id}");
