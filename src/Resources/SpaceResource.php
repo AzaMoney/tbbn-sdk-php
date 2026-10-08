@@ -47,6 +47,12 @@ final class SpaceResource
         return $this->client->request('GET', TbbnClient::withQuery('/v1/space/bookings', $query));
     }
 
+    /** A location's spot board: who should be in each spot now, who's next, who's arriving. */
+    public function spotBoard(string $branchId): mixed
+    {
+        return $this->client->request('GET', "/v1/space/branches/{$branchId}/spot-board");
+    }
+
     public function paymentInfo(string $bookingId, ?string $token = null): mixed
     {
         return $this->client->request('GET', TbbnClient::withQuery("/v1/space/bookings/{$bookingId}/payment-info", ['token' => $token]));
