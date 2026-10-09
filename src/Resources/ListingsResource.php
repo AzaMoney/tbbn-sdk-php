@@ -30,6 +30,12 @@ final class ListingsResource
         return $this->client->request('POST', "/merchant/listings/{$id}/availability", ['status' => $status]);
     }
 
+    /** Your own catalogue, every status but deleted, newest first ({data, nextCursor, counts}). */
+    public function listOwn(array $query = []): mixed
+    {
+        return $this->client->request('GET', TbbnClient::withQuery('/merchant/listings', $query));
+    }
+
     public function replaceWants(string $id, array $wants): mixed
     {
         return $this->client->request('PUT', "/merchant/listings/{$id}/wants", ['wants' => $wants]);
