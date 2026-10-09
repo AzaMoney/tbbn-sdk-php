@@ -20,6 +20,12 @@ final class WebhooksResource
         return $this->client->request('GET', TbbnClient::withQuery('/v1/webhooks/subscriptions', ['merchantId' => $merchantId]));
     }
 
+    /** Rename it ('name'), move it ('url') or change its 'events'; the signing secret is kept. */
+    public function updateSubscription(string $id, array $input): mixed
+    {
+        return $this->client->request('PATCH', "/v1/webhooks/subscriptions/{$id}", $input);
+    }
+
     /** Ownership comes from your credential. */
     public function disableSubscription(string $id): mixed
     {
