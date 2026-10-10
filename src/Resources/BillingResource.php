@@ -70,6 +70,12 @@ final class BillingResource
         return $this->client->request('POST', '/v1/billing/usage', $input);
     }
 
+    /** Your Merchant's plan (its Business's) and this period's usage: your own count of each service beside the Business's total and the plan's allowance. */
+    public function merchantSummary(): mixed
+    {
+        return $this->client->request('GET', '/v1/billing/merchant/summary');
+    }
+
     public function usageSummary(string $businessId, ?string $billingPeriodRef = null): mixed
     {
         return $this->client->request('GET', TbbnClient::withQuery("/v1/billing/usage/{$businessId}", ['billingPeriodRef' => $billingPeriodRef]));

@@ -36,6 +36,12 @@ final class SpaceResource
         return $this->client->request('GET', "/v1/space/spaces/{$spaceId}/booking-terms");
     }
 
+    /** Bookable slots ('from' => YYYY-MM-DD in the Space's time zone, 'days' => up to 62). A booking must start on an AVAILABLE slot. */
+    public function availability(string $spaceId, array $query = []): mixed
+    {
+        return $this->client->request('GET', TbbnClient::withQuery("/v1/space/spaces/{$spaceId}/availability", $query));
+    }
+
     /** A member booking must include `acceptTerms => true`. */
     public function createBooking(array $input): mixed
     {
