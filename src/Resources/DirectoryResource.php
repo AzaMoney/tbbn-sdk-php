@@ -19,4 +19,10 @@ final class DirectoryResource
     {
         return $this->client->request('GET', "/v1/directory/listings/{$id}");
     }
+
+    /** A member's public storefront: their profile and their own public listings. */
+    public function storefront(string $slug, int $page = 1): mixed
+    {
+        return $this->client->request('GET', "/v1/directory/storefronts/" . rawurlencode($slug) . "?page={$page}");
+    }
 }
