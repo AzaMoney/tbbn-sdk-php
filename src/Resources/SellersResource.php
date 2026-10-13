@@ -22,6 +22,12 @@ final class SellersResource
         return $this->client->request('POST', '/merchant/sellers/headless', ['merchantId' => $merchantId, 'merchantSellerRef' => $merchantSellerRef, 'name' => $name], TbbnClient::idempotencyHeader($idempotencyKey));
     }
 
+    /** Redeem a customer's TBBN link code, naming your own reference for them (optional). */
+    public function redeemLinkCode(string $code, ?string $merchantSellerRef = null, ?string $idempotencyKey = null): mixed
+    {
+        return $this->client->request('POST', '/merchant/sellers/link-code', ['code' => $code, 'merchant_seller_ref' => $merchantSellerRef], TbbnClient::idempotencyHeader($idempotencyKey));
+    }
+
     public function get(string $id): mixed
     {
         return $this->client->request('GET', "/v1/sellers/{$id}");
