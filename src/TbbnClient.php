@@ -150,6 +150,9 @@ final class TbbnClient
             CURLOPT_HTTPHEADER => $headers,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POSTFIELDS => $body !== null ? json_encode($body) : null,
+            // Connected within 10 seconds and answered within a minute — never waits forever.
+            CURLOPT_CONNECTTIMEOUT => 10,
+            CURLOPT_TIMEOUT => 60,
         ]);
 
         $responseBody = curl_exec($ch);

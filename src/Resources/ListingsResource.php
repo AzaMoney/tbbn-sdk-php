@@ -43,7 +43,7 @@ final class ListingsResource
 
     public function getWants(string $id): mixed
     {
-        return $this->client->request('GET', "/merchant/listings/{$id}/wants");
+        return $this->client->request('GET', "/v1/listings/{$id}/wants");
     }
 
     public function get(string $id): mixed

@@ -23,6 +23,12 @@ final class BusinessMerchantLinksResource
         return $this->client->request('GET', "/v1/businesses/{$businessId}/merchant-links");
     }
 
+    /** The Businesses a Merchant is linked to (your own Merchant id with an API key). */
+    public function listForMerchant(string $merchantId): mixed
+    {
+        return $this->client->request('GET', TbbnClient::withQuery('/v1/business-merchant-links', ['merchantId' => $merchantId]));
+    }
+
     public function revoke(string $businessId, string $linkId): mixed
     {
         return $this->client->request('POST', "/v1/businesses/{$businessId}/merchant-links/{$linkId}/revoke");
