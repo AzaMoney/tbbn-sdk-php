@@ -2,7 +2,7 @@
 // A minimal end-to-end walkthrough: publish a listing, look at incoming offers, and verify a
 // webhook delivery. Run against the sandbox with a sandbox key:
 //
-//   TBBN_API_KEY=sk_sandbox_... TBBN_MERCHANT_ID=... TBBN_SELLER_ID=... php example/basic.php
+//   TBBN_API_KEY=tbbn_sk_sandbox_... TBBN_MERCHANT_ID=... TBBN_SELLER_ID=... php example/basic.php
 
 declare(strict_types=1);
 

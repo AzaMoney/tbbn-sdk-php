@@ -21,7 +21,7 @@ composer require tbbn/sdk
 ```php
 use Tbbn\Sdk\TbbnClient;
 
-$client = new TbbnClient(baseUrl: 'https://api.tbbnetwork.com', apiKey: 'sk_sandbox_...');
+$client = new TbbnClient(baseUrl: 'https://api.tbbnetwork.com', apiKey: 'tbbn_sk_sandbox_...');
 
 $listing = $client->listings->upsert([
     'merchantId' => '...',
@@ -46,7 +46,7 @@ A complete runnable walkthrough is in [`example/basic.php`](./example/basic.php)
 Pass either an **API key** (`apiKey`, issued to your merchant at
 [merchants.tbbnetwork.com](https://merchants.tbbnetwork.com)) or a **session token**
 (`accessToken`, obtained through one of the `auth` sign-in flows). Sandbox keys
-(`sk_sandbox_…`) work against the same API and never touch live data.
+(`tbbn_sk_sandbox_…`) work against the same API and never touch live data.
 
 ## Webhooks
 

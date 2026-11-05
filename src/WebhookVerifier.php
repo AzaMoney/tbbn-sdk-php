@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Tbbn\Sdk;
 
 /**
- * Verifies the X-TBBN-Signature header format `t=<unix_ts>,v1=<hmac_sha256_hex>`. See
- * docs/architecture/event-webhook-catalog.md. Ported faithfully from
+ * Verifies the X-TBBN-Signature header format `t=<unix_ts>,v1=<hmac_sha256_hex>`. For a day after
+ * a signing secret is rotated the header carries a `v1` for each secret; matching any one is
+ * enough. See docs/architecture/event-webhook-catalog.md. Ported faithfully from
  * packages/sdk-js/src/webhooks.ts — same algorithm, same 5-minute replay window.
  */
 final class WebhookVerifier
@@ -17,17 +18,18 @@ final class WebhookVerifier
     {
         $now ??= time();
 
-        $parts = [];
+        $timestamp = null;
+        $signatures = [];
         foreach (explode(',', $signatureHeader) as $pair) {
             [$key, $value] = array_pad(explode('=', $pair, 2), 2, null);
-            if ($key !== null && $value !== null) {
-                $parts[$key] = $value;
+            if ($key === 't' && $value !== null) {
+                $timestamp = (int) $value;
+            } elseif ($key === 'v1' && $value !== null) {
+                $signatures[] = $value;
             }
         }
 
-        $timestamp = isset($parts['t']) ? (int) $parts['t'] : null;
-        $signature = $parts['v1'] ?? null;
-        if ($timestamp === null || $signature === null) {
+        if ($timestamp === null || $signatures === []) {
             return false;
         }
         if (abs($now - $timestamp) > self::REPLAY_WINDOW_SECONDS) {
@@ -35,6 +37,11 @@ final class WebhookVerifier
         }
 
         $expected = hash_hmac('sha256', "{$timestamp}.{$rawBody}", $signingSecret);
-        return hash_equals($expected, $signature);
+        foreach ($signatures as $signature) {
+            if (hash_equals($expected, $signature)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
