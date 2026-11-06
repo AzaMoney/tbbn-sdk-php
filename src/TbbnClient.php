@@ -31,6 +31,7 @@ use Tbbn\Sdk\Resources\TradeEngineResource;
 use Tbbn\Sdk\Resources\TradeSessionsResource;
 use Tbbn\Sdk\Resources\WebhooksResource;
 use Tbbn\Sdk\Resources\BranchesResource;
+use Tbbn\Sdk\Resources\TranslationsResource;
 use Tbbn\Sdk\Resources\PlatformOAuthResource;
 use Tbbn\Sdk\Resources\TradeInsResource;
 use Tbbn\Sdk\Resources\TradeCreditsResource;
@@ -59,6 +60,7 @@ final class TbbnClient
     public readonly SellersResource $sellers;
     public readonly BusinessesResource $businesses;
     public readonly BranchesResource $branches;
+    public readonly TranslationsResource $translations;
     public readonly PlatformOAuthResource $platformOAuth;
     public readonly TradeInsResource $tradeIns;
     public readonly TradeCreditsResource $tradeCredits;
@@ -104,6 +106,7 @@ final class TbbnClient
         $this->sellers = new SellersResource($this);
         $this->businesses = new BusinessesResource($this);
         $this->branches = new BranchesResource($this);
+        $this->translations = new TranslationsResource($this);
         $this->platformOAuth = new PlatformOAuthResource($this);
         $this->tradeIns = new TradeInsResource($this);
         $this->tradeCredits = new TradeCreditsResource($this);
